@@ -1,0 +1,21 @@
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js').then(reg => {
+    console.log("Service Worker Registered");
+
+    // Listen for updates
+    reg.addEventListener("updatefound", () => {
+      const newWorker = reg.installing;
+      newWorker.addEventListener("statechange", () => {
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          // Show update popup
+          if (confirm("A new version is available! Refresh now?")) {
+            newWorker.postMessage("skipWaiting");
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
