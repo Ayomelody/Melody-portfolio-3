@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background:#fff; }
+    input { padding: 5px; margin: 5px; width: 60%; }
+    li { list-style: none; margin: 5px 0; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h1>✅ Melody's To-Do List</h1>
+  <input id="taskInput" type="text" placeholder="Enter a task"/>
+  <button onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+  <p><a href="index.html">⬅ Back to Portfolio</a></p>
+
+  <script>
+    const taskList = document.getElementById('taskList');
+    const input = document.getElementById('taskInput');
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      taskList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.textContent = task;
+        const del = document.createElement('button');
+        del.textContent = "❌";
+        del.onclick = () => deleteTask(index);
+        li.appendChild(del);
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      if (input.value.trim() === '') return;
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.push(input.value.trim());
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      input.value = '';
+      loadTasks();
+    }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>
