@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Generator</title>
+  <style>
+    body { text-align: center; font-family: sans-serif; background: #f9f9f9; padding: 20px; }
+    #quote { font-size: 1.2em; margin: 20px; }
+    button { padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>💡 Melody's Quote Generator</h1>
+  <p id="quote">Tap the button to get inspired!</p>
+  <button onclick="newQuote()">New Quote</button>
+  <p><a href="index.html">⬅ Back to Portfolio</a></p>
+
+  <script>
+    const quotes = [
+      "Keep pushing forward!",
+      "You are capable of amazing things!",
+      "Every day is a chance to learn!",
+      "Code your dreams into reality!",
+      "Believe in yourself, Melody!"
+    ];
+
+    function newQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quote').innerText = quotes[randomIndex];
+    }
+  </script>
+</body>
+</html>
